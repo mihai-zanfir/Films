@@ -1,0 +1,40 @@
+# Created on https://app.quickdatabasediagrams.com/#/
+# Modify this code to update the DB schema diagram.
+# To reset the sample schema, replace everything with
+# two dots ('..' - without quotes).
+
+ACTOR as a
+----
+ID PK int
+NAME UNIQUE varchar(150)
+IMAGE varchar(250)
+IMDB varchar(250)
+DESCRIPTION varchar(500)
+
+COUNTRY as c
+----
+ID PK int
+NAME UNIQUE varchar(150)
+
+GENRE as g
+----
+ID PK int
+NAME UNIQUE varchar(100)
+
+FILM as f
+----
+ID PK int
+TITLE UNIQUE varchar(300)
+YEAR int
+DIRECTOR varchar(100)
+GENRE_ID int FK >- g.ID
+COUNTRY_ID int FK >- c.ID
+IMAGE varchar(250)
+IMDB varchar(250)
+DESCRIPTION varchar(500)
+
+FILM_ACTOR
+----
+ID PK int
+FILM_ID int FK >- f.ID
+ACTOR_ID int FK >- a.ID
