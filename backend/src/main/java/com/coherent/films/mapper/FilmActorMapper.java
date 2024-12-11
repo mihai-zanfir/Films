@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -22,60 +23,21 @@ public interface FilmActorMapper {
     @Select("SELECT * FROM FILM_ACTOR WHERE id = #{id}")
     List<FilmActor> findById(int id);
 
-    @Results(
-            id = "findByFilmId",
-            value = {
-                    @Result(property = "id", column = "id"),
-                    @Result(
-                            property = "film",
-                            column = "film_id",
-                            javaType = Film.class,
-                            one = @One(
-                                    select = "com.coherent.films.mapper.FilmMapper.findById",
-                                    fetchType = FetchType.EAGER
-                            )
-                    ),
-                    @Result(
-                            property = "actor",
-                            column = "actor_id",
-                            javaType = Actor.class,
-                            one = @One(
-                                    select = "com.coherent.films.mapper.ActorMapper.findById",
-                                    fetchType = FetchType.EAGER
-                            )
-                    )
-            }
-    )
+    @Results(id = "filmActorResult", value = {
+        @Result(property = "id", column = "id"),
+        @Result(property = "film", column = "film_id", javaType = Film.class,
+                one = @One(select = "com.coherent.films.mapper.FilmMapper.findById", fetchType = FetchType.EAGER)),
+        @Result(property = "actor", column = "actor_id", javaType = Actor.class,
+                one = @One(select = "com.coherent.films.mapper.ActorMapper.findById", fetchType = FetchType.EAGER))
+    })
     @Select("SELECT * FROM FILM_ACTOR WHERE film_id = #{filmId}")
     List<FilmActor> findByFilmId(int filmId);
 
+    @ResultMap("filmActorResult")
     @Select("SELECT * FROM FILM_ACTOR WHERE actor_id = #{actorId}")
     List<FilmActor> findByActorId(int actorId);
 
-    @Results(
-            id = "findAll",
-            value = {
-                    @Result(property = "id", column = "id"),
-                    @Result(
-                            property = "film",
-                            column = "film_id",
-                            javaType = Film.class,
-                            one = @One(
-                                    select = "com.coherent.films.mapper.FilmMapper.findById",
-                                    fetchType = FetchType.EAGER
-                            )
-                    ),
-                    @Result(
-                            property = "actor",
-                            column = "actor_id",
-                            javaType = Actor.class,
-                            one = @One(
-                                    select = "com.coherent.films.mapper.ActorMapper.findById",
-                                    fetchType = FetchType.EAGER
-                            )
-                    )
-            }
-    )
+    @ResultMap("filmActorResult")
     @Select("SELECT * FROM FILM_ACTOR order by film_id")
     List<FilmActor> findAll();
 

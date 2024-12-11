@@ -13,9 +13,9 @@ export default function FilmForm({films, setFilms, countries, genres}) {
     const [title, setTitle] = useState("");
     const [year, setYear] = useState("");
     const [director, setDirector] = useState("");
-    const [genre_id, setGenreId] = useState(1);
+    const [genre_id, setGenreId] = useState("");
     const [genre, setGenre] = useState("");
-    const [country_id, setCountryId] = useState(132);
+    const [country_id, setCountryId] = useState("");
     const [country, setCountry] = useState("");
     const [image, setImage] = useState("");
     const [imdb, setImdb] = useState("");

@@ -5,8 +5,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -31,9 +29,3 @@ public interface CountryMapper {
     @Delete("DELETE FROM COUNTRY WHERE id = #{id}")
     void delete(int id);
 }
-    /*@Results(
-        id = "countryFindById",
-        value = {
-                @Result(property = "id", column = "id"),
-                @Result(property = "name", column = "name")
-        })*/

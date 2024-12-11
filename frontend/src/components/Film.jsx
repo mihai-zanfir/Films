@@ -8,8 +8,9 @@ import Button from "@mui/material/Button";
 import {Avatar, CardHeader, IconButton, Link} from "@mui/material";
 import TextFieldEditing from "./TextFieldEditing.jsx";
 import {deleteFilm, updateFilm} from "../service/filmService.jsx";
+import ActorsDialog from "./ActorsDialog.jsx";
 
-export default function Film({films, setFilms, film, countries, genres}) {
+export default function Film({films, setFilms, film, allActors, countries, genres}) {
     const [editingFilm, setEditingFilm] = useState(null);
     const [title, setTitle] = useState("");
     const [year, setYear] = useState("");
@@ -22,6 +23,7 @@ export default function Film({films, setFilms, film, countries, genres}) {
     const [imdb, setImdb] = useState("");
     const [description, setDescription] = useState("");
     const [actors, setActors] = useState([]);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         console.log("Set Film properties");
@@ -107,6 +109,10 @@ export default function Film({films, setFilms, film, countries, genres}) {
         setGenre(genres.filter(genre => genre.id === e.target.value)[0].name);
     };
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
     return (
         <Card key={film.id} sx={{minWidth: 400, maxWidth: 400, minHeight: 900}} className="card">
             <TextFieldEditing objectType="CardHeader" label="Title:" txtValue={title} editing={editingFilm}
@@ -137,6 +143,12 @@ export default function Film({films, setFilms, film, countries, genres}) {
                             <Link href={actor.imdb} target="_blank">{actor.name}</Link>
                         </div>
                     ))}
+                    {editingFilm &&
+                        <Button onClick={handleClickOpen}>
+                            Edit Actors
+                        </Button>
+                    }
+                    <ActorsDialog open={open} setOpen={setOpen} allActors={allActors} />
                 </Typography>
             </CardContent>
             <CardActions className="bottom-right">

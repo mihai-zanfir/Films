@@ -6,6 +6,7 @@ import com.coherent.films.mapper.FilmMapper;
 import com.coherent.films.mapper.GenreMapper;
 import org.springframework.boot.CommandLineRunner;
 
+//This is used for fast testing
 //@SpringBootApplication
 public class BackendCommandLineApplication  implements CommandLineRunner {
     public static void main(String[] args) {
@@ -38,5 +39,4 @@ public class BackendCommandLineApplication  implements CommandLineRunner {
         //System.out.println(actorMapper.findAll());
         //System.out.println(genreMapper.findAll());
     }
-
 }

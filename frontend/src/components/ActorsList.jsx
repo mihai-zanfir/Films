@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid2";
 import ActorForm from "./ActorForm.jsx";
 
 export default function ActorsList() {
-
     const [actors, setActors] = useState([]);
 
     useEffect(() => {

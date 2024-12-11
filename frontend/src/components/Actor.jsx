@@ -29,7 +29,7 @@ export default function Actor({actors, setActors, actor}) {
             const id = actor.id;
             console.log("Save edited actor with id=" + id);
             console.log({id, name, image, imdb, description });
-            updateActor(id, {id, name, image, imdb, description })
+            updateActor({id, name, image, imdb, description })
                 .then((response) => {
                     console.log("Actor updated!");
                     console.log(response.data);
