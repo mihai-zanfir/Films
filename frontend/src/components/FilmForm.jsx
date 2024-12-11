@@ -7,6 +7,9 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import {Avatar, Link, MenuItem, TextField} from "@mui/material";
 import {createFilm} from "../service/filmService.jsx";
+import newFilm from "../types/FilmObj.tsx";
+import newCountry from "../types/CountryObj.tsx";
+import newGenre from "../types/GenreObj.tsx";
 
 export default function FilmForm({films, setFilms, countries, genres}) {
 
@@ -25,23 +28,11 @@ export default function FilmForm({films, setFilms, countries, genres}) {
     const handleCreate = () => {
         console.log("New film!");
         //console.log({title, year, director, genre, country, image, imdb, description});
-        /*const actorsObj = [
-            {"id": 1, "name": "", "image": "", "imdb": "", "description": ""},
+        /*const actorsObj = [{"id": 1, "name": "", "image": "", "imdb": "", "description": ""},
             {"id": 2, "name": "", "image": "", "imdb": "", "description": ""}];*/
-        const genreObj = {"id": genre_id, "name": genre};
-        const countryObj = {"id": country_id, "name": country};
-        const filmObj = {
-            "id": 0,
-            "title": title,
-            "year": year,
-            "director": director,
-            "genre": genreObj,
-            "country": countryObj,
-            "image": image,
-            "imdb": imdb,
-            "description": description,
-            "actors": actors
-        }
+        const countryObj = newCountry(country_id, country);
+        const genreObj = newGenre(genre_id, genre);
+        const filmObj = newFilm(0, title, year, director, genreObj, countryObj, image, imdb, description, actors);
         console.log(filmObj);
 
         createFilm(filmObj)
