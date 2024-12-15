@@ -5,7 +5,7 @@ import Film from "./Film.jsx";
 import Grid from '@mui/material/Grid2';
 import FilmForm from "./FilmForm.jsx";
 
-export default function FilmsList({countries, genres}) {
+export default function FilmsList() {
 
     const [films, setFilms] = useState([]);
     const [allActors, setAllActors] = useState([]);
@@ -35,11 +35,11 @@ export default function FilmsList({countries, genres}) {
             <Grid container spacing={2}>
                 {films.map((film) => (
                     <Grid key={film.id}>
-                        <Film key={film.id} films={films} setFilms={setFilms} film={film} allActors={allActors} countries={countries} genres={genres} />
+                        <Film key={film.id} films={films} setFilms={setFilms} film={film} allActors={allActors} />
                     </Grid>
                 ))}
                 <Grid key={0}>
-                    <FilmForm key={0} films={films} setFilms={setFilms} countries={countries} genres={genres} />
+                    <FilmForm key={0} films={films} setFilms={setFilms} />
                 </Grid>
             </Grid>
         </div>

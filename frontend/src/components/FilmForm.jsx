@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useContext, useState} from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -10,8 +10,9 @@ import {createFilm} from "../service/filmService.jsx";
 import newFilm from "../types/FilmObj.tsx";
 import newCountry from "../types/CountryObj.tsx";
 import newGenre from "../types/GenreObj.tsx";
+import {CountriesContext, GenresContext} from "../context/MyProviders.jsx";
 
-export default function FilmForm({films, setFilms, countries, genres}) {
+export default function FilmForm({films, setFilms}) {
 
     const [title, setTitle] = useState("");
     const [year, setYear] = useState("");
@@ -24,6 +25,8 @@ export default function FilmForm({films, setFilms, countries, genres}) {
     const [imdb, setImdb] = useState("");
     const [description, setDescription] = useState("");
     const [actors, setActors] = useState([]);
+    const {countries} = useContext(CountriesContext);
+    const {genres} = useContext(GenresContext);
 
     const handleCreate = () => {
         console.log("New film!");
@@ -92,7 +95,7 @@ export default function FilmForm({films, setFilms, countries, genres}) {
                                onChange={(e) => setDirector(e.target.value)}/>
                     <TextField label="Country:" value={country_id} size="small" margin="normal" fullWidth required
                                onChange={handleCountryChange} select>
-                        {countries.map((country) => (
+                        {countries?.map((country) => (
                             <MenuItem key={country.id} value={country.id}>
                                 {country.name}
                             </MenuItem>
@@ -100,7 +103,7 @@ export default function FilmForm({films, setFilms, countries, genres}) {
                     </TextField>
                     <TextField label="Genre:" value={genre_id} size="small" margin="normal" fullWidth required
                                onChange={handleGenreChange} select>
-                        {genres.map((genre) => (
+                        {genres?.map((genre) => (
                             <MenuItem key={genre.id} value={genre.id}>
                                 {genre.name}
                             </MenuItem>

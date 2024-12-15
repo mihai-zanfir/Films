@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -12,8 +12,9 @@ import ActorsDialog from "./ActorsDialog.jsx";
 import newFilm from "../types/FilmObj.tsx";
 import newCountry from "../types/CountryObj.tsx";
 import newGenre from "../types/GenreObj.tsx";
+import {CountriesContext, GenresContext} from "../context/MyProviders.jsx";
 
-export default function Film({films, setFilms, film, allActors, countries, genres}) {
+export default function Film({films, setFilms, film, allActors}) {
     const [editingFilm, setEditingFilm] = useState(null);
     const [title, setTitle] = useState("");
     const [year, setYear] = useState("");
@@ -27,6 +28,8 @@ export default function Film({films, setFilms, film, allActors, countries, genre
     const [description, setDescription] = useState("");
     const [actors, setActors] = useState([]);
     const [open, setOpen] = useState(false);
+    const {countries} = useContext(CountriesContext);
+    const {genres} = useContext(GenresContext);
 
     useEffect(() => {
         console.log("Set Film properties");
